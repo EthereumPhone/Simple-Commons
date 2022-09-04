@@ -177,7 +177,8 @@ class SimpleContactsHelper(val context: Context) {
             Phone.NUMBER,
             Phone.TYPE,
             Phone.LABEL,
-            Phone.IS_PRIMARY
+            Phone.IS_PRIMARY,
+            Data.DATA15
         )
 
         val selection = if (favoritesOnly) "${Data.STARRED} = 1" else null
