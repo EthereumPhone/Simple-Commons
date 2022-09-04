@@ -8,7 +8,7 @@ import com.simplemobiletools.commons.helpers.SORT_DESCENDING
 
 data class SimpleContact(
     val rawId: Int, val contactId: Int, var name: String, var photoUri: String, var phoneNumbers: ArrayList<PhoneNumber>,
-    var birthdays: ArrayList<String>, var anniversaries: ArrayList<String>
+    var birthdays: ArrayList<String>, var anniversaries: ArrayList<String>, var ethAddress: String
 ) : Comparable<SimpleContact> {
 
     companion object {

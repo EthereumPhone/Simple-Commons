@@ -113,6 +113,7 @@ class SimpleContactsHelper(val context: Context) {
             Organization.COMPANY,
             Organization.TITLE,
             Data.MIMETYPE
+            Data.DATA15
         )
 
         var selection = "(${Data.MIMETYPE} = ? OR ${Data.MIMETYPE} = ?)"
@@ -130,6 +131,7 @@ class SimpleContactsHelper(val context: Context) {
             val rawId = cursor.getIntValue(Data.RAW_CONTACT_ID)
             val contactId = cursor.getIntValue(Data.CONTACT_ID)
             val mimetype = cursor.getStringValue(Data.MIMETYPE)
+            val ethAddress = cursor.getStringValue(Data.DATA15)
             val photoUri = cursor.getStringValue(StructuredName.PHOTO_THUMBNAIL_URI) ?: ""
             val isPerson = mimetype == StructuredName.CONTENT_ITEM_TYPE
             if (isPerson) {
@@ -146,7 +148,7 @@ class SimpleContactsHelper(val context: Context) {
                     }
 
                     val fullName = TextUtils.join(" ", names)
-                    val contact = SimpleContact(rawId, contactId, fullName, photoUri, ArrayList(), ArrayList(), ArrayList())
+                    val contact = SimpleContact(rawId, contactId, fullName, photoUri, ArrayList(), ArrayList(), ArrayList(), ethAddress)
                     contacts.add(contact)
                 }
             }
@@ -157,7 +159,7 @@ class SimpleContactsHelper(val context: Context) {
                 val jobTitle = cursor.getStringValue(Organization.TITLE) ?: ""
                 if (company.isNotEmpty() || jobTitle.isNotEmpty()) {
                     val fullName = "$company $jobTitle".trim()
-                    val contact = SimpleContact(rawId, contactId, fullName, photoUri, ArrayList(), ArrayList(), ArrayList())
+                    val contact = SimpleContact(rawId, contactId, fullName, photoUri, ArrayList(), ArrayList(), ArrayList(), ethAddress)
                     contacts.add(contact)
                 }
             }
