@@ -112,7 +112,7 @@ class SimpleContactsHelper(val context: Context) {
             StructuredName.PHOTO_THUMBNAIL_URI,
             Organization.COMPANY,
             Organization.TITLE,
-            Data.MIMETYPE
+            Data.MIMETYPE,
             Data.DATA15
         )
 
