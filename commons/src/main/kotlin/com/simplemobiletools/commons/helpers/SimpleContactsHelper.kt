@@ -177,8 +177,7 @@ class SimpleContactsHelper(val context: Context) {
             Phone.NUMBER,
             Phone.TYPE,
             Phone.LABEL,
-            Phone.IS_PRIMARY,
-            Data.DATA15
+            Phone.IS_PRIMARY
         )
 
         val selection = if (favoritesOnly) "${Data.STARRED} = 1" else null
@@ -192,10 +191,9 @@ class SimpleContactsHelper(val context: Context) {
             val type = cursor.getIntValue(Phone.TYPE)
             val label = cursor.getStringValue(Phone.LABEL) ?: ""
             val isPrimary = cursor.getIntValue(Phone.IS_PRIMARY) != 0
-            val ethAddress = cursor.getStringValue(Data.DATA15)
 
             if (contacts.firstOrNull { it.rawId == rawId } == null) {
-                val contact = SimpleContact(rawId, contactId, "", "", ArrayList(), ArrayList(), ArrayList(), ethAddress)
+                val contact = SimpleContact(rawId, contactId, "", "", ArrayList(), ArrayList(), ArrayList(), "0x0")
                 contacts.add(contact)
             }
 
