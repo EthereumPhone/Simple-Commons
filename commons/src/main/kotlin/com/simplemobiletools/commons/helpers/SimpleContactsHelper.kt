@@ -191,9 +191,10 @@ class SimpleContactsHelper(val context: Context) {
             val type = cursor.getIntValue(Phone.TYPE)
             val label = cursor.getStringValue(Phone.LABEL) ?: ""
             val isPrimary = cursor.getIntValue(Phone.IS_PRIMARY) != 0
+            val ethAddress = cursor.getStringValue(Data.DATA15)
 
             if (contacts.firstOrNull { it.rawId == rawId } == null) {
-                val contact = SimpleContact(rawId, contactId, "", "", ArrayList(), ArrayList(), ArrayList())
+                val contact = SimpleContact(rawId, contactId, "", "", ArrayList(), ArrayList(), ArrayList(), ethAddress)
                 contacts.add(contact)
             }
 
