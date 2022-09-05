@@ -102,7 +102,7 @@ class SimpleContactsHelper(val context: Context) {
         for (name in names) {
             for (contact in contacts) {
                 if (name.rawId == contact.rawId) {
-                    name.ethAddress = contact.ethAddress
+                    contact.ethAddress = name.ethAddress
                 }
             }
         }
