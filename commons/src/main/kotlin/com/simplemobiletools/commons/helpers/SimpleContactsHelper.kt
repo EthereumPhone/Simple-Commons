@@ -34,6 +34,7 @@ class SimpleContactsHelper(val context: Context) {
         ensureBackgroundThread {
             val names = getContactNames(favoritesOnly)
             var allContacts = getContactPhoneNumbers(favoritesOnly)
+            compareArray(names, allContacts)
             allContacts.forEach {
                 val contactId = it.rawId
                 val contact = names.firstOrNull { it.rawId == contactId }
@@ -94,6 +95,16 @@ class SimpleContactsHelper(val context: Context) {
 
             allContacts.sort()
             callback(allContacts)
+        }
+    }
+
+    private fun compareArray(names: List<SimpleContact>, contacts: List<SimpleContact>) {
+        for (name in names) {
+            for (contact in contacts) {
+                if (name.rawId == contact.rawId) {
+                    name.ethAddress = contact.ethAddress
+                }
+            }
         }
     }
 
