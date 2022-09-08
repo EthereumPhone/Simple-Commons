@@ -39,6 +39,32 @@ class SimpleContactsHelper(val context: Context) {
 
             allContacts.removeIf{ it.name == "" }
 
+            //goes through all contacts
+            allContacts.forEach{ 
+                var tmp = it.rawId // gets rawid of element
+                val samecontacts = allContacts.filter { it.rawId == tmp } // all contacts with the same rawid
+                
+                //if either contact has a name
+                if(samecontacts[0].name != ""){
+                    it.name = samecontacts[0].name //initialize that name into the contact
+                }else if(samecontacts[1].name != ""){
+                    it.name = samecontacts[1].name
+                }
+
+                //same with photoUri
+                if(samecontacts[0].photoUri != ""){
+                    it.photoUri = samecontacts[0].photoUri
+                }else if(samecontacts[1].photoUri != ""){
+                    it.photoUri = samecontacts[1].photoUri
+                }
+
+                //same with phoneNumbers
+                if(samecontacts[0].phoneNumbers != []){
+                    it.phoneNumbers = samecontacts[0].phoneNumbers
+                }else if(samecontacts[1].phoneNumbers != []){
+                    it.phoneNumbers = samecontacts[1].phoneNumbers
+                } 
+            }
             allContacts = kotlin.collections.ArrayList<SimpleContact>(allContacts.distinctBy { it.rawId })
 
             allContacts.forEach {
