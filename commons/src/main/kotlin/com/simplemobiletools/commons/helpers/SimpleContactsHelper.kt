@@ -104,8 +104,15 @@ class SimpleContactsHelper(val context: Context) {
                 if (name.rawId == contact.rawId) {
                     contact.ethAddress = name.ethAddress
                 }
+                if(!containsName(contacts,name.rawId) && name.ethAddress != null && name.ethAddress != "0x0" ){
+                    contacts.add(name)
+                }
             }
         }
+    }
+
+    private fun containsName(list: List<SimpleContact>, rawId: String?): Boolean {
+        return list.stream().filter(Predicate<SimpleContact> { o: SimpleContact -> o.rawId.equals(name) }).findFirst().isPresent()
     }
 
     private fun getContactNames(favoritesOnly: Boolean): List<SimpleContact> {
