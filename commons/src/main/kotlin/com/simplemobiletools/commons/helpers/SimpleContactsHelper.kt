@@ -37,11 +37,7 @@ class SimpleContactsHelper(val context: Context) {
             var allContacts = getContactPhoneNumbers(favoritesOnly)
             allContacts = compareArray(names, allContacts)
 
-            for (contact in allContacts) {
-                if (contact.name == "") {
-                    allContacts.remove(contact)
-                }
-            }
+            allContacts.removeIf{ it.name == "" }
 
             allContacts = kotlin.collections.ArrayList<SimpleContact>(allContacts.distinctBy { it.rawId })
 
