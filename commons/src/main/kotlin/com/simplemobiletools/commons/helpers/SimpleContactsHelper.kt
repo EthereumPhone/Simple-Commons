@@ -28,13 +28,14 @@ import com.simplemobiletools.commons.R
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.models.PhoneNumber
 import com.simplemobiletools.commons.models.SimpleContact
+import java.util.function.Predicate;
 
 class SimpleContactsHelper(val context: Context) {
     fun getAvailableContacts(favoritesOnly: Boolean, callback: (ArrayList<SimpleContact>) -> Unit) {
         ensureBackgroundThread {
             val names = getContactNames(favoritesOnly)
             var allContacts = getContactPhoneNumbers(favoritesOnly)
-            compareArray(names, allContacts)
+            allContacts = compareArray(names, allContacts)
             allContacts.forEach {
                 val contactId = it.rawId
                 val contact = names.firstOrNull { it.rawId == contactId }
@@ -98,21 +99,23 @@ class SimpleContactsHelper(val context: Context) {
         }
     }
 
-    private fun compareArray(names: List<SimpleContact>, contacts: List<SimpleContact>) {
+    private fun compareArray(names: List<SimpleContact>, contacts: List<SimpleContact>): kotlin.collections.ArrayList<SimpleContact> {
+        var copyContacts = contacts
         for (name in names) {
-            for (contact in contacts) {
+            for (contact in copyContacts) {
                 if (name.rawId == contact.rawId) {
                     contact.ethAddress = name.ethAddress
                 }
-                if(!containsName(contacts,name.rawId) && name.ethAddress != null && name.ethAddress != "0x0" ){
-                    contacts.add(name)
+                if(!containsName(copyContacts,name.rawId.toString()) && name.ethAddress != null && name.ethAddress != "0x0" ){
+                    copyContacts = copyContacts + name
                 }
             }
         }
+        return kotlin.collections.ArrayList(copyContacts)
     }
 
     private fun containsName(list: List<SimpleContact>, rawId: String?): Boolean {
-        return list.stream().filter(Predicate<SimpleContact> { o: SimpleContact -> o.rawId.equals(name) }).findFirst().isPresent()
+        return list.stream().filter(Predicate<SimpleContact> { o: SimpleContact -> o.rawId.equals(rawId) }).findFirst().isPresent()
     }
 
     private fun getContactNames(favoritesOnly: Boolean): List<SimpleContact> {
