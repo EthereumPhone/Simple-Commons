@@ -37,7 +37,7 @@ class SimpleContactsHelper(val context: Context) {
             var allContacts = getContactPhoneNumbers(favoritesOnly)
             allContacts = compareArray(names, allContacts)
 
-            //allContacts.removeIf{ it.name == "" }
+            allContacts.removeIf{ it.name == "" }
 
             //goes through all contacts
             allContacts.forEach{ 
@@ -48,7 +48,7 @@ class SimpleContactsHelper(val context: Context) {
                 //if either contact has a name
                 if(samecontacts[0].name == "" && samecontacts[1].name != ""){
                     it.name = samecontacts[1].name //initialize that name into the contact
-                }else if(ssamecontacts[1].name == "" && samecontacts[0].name != ""){
+                }else if(samecontacts[1].name == "" && samecontacts[0].name != ""){
                     it.name = samecontacts[0].name
                 }
 
@@ -65,7 +65,7 @@ class SimpleContactsHelper(val context: Context) {
                 }else if(samecontacts[1].phoneNumbers == "" && samecontacts[0].phoneNumbers != ""){
                     it.phoneNumbers = samecontacts[0].phoneNumbers
                 }
-            }
+            }/* */
             allContacts = kotlin.collections.ArrayList<SimpleContact>(allContacts.distinctBy { it.rawId })
 
             allContacts.forEach {
