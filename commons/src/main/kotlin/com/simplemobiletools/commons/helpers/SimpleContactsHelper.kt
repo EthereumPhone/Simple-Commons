@@ -37,7 +37,7 @@ class SimpleContactsHelper(val context: Context) {
             var allContacts = getContactPhoneNumbers(favoritesOnly)
             allContacts = compareArray(names, allContacts)
 
-            allContacts.removeIf{ it.name == "" }
+            //allContacts.removeIf{ it.name == "" }
 
             //goes through all contacts
             allContacts.forEach{ 
@@ -50,9 +50,9 @@ class SimpleContactsHelper(val context: Context) {
                     it.name = samecontacts[0].name
                 }
 
-                if(samecontacts[0].phoneNumbers == [] && samecontacts[1].phoneNumbers != []){
+                if(!samecontacts[0].phoneNumbers.isNotEmpty() && samecontacts[1].phoneNumbers.isNotEmpty()){
                     it.phoneNumbers = samecontacts[1].phoneNumbers
-                }else if(samecontacts[1].phoneNumbers == "" && samecontacts[0].phoneNumbers != ""){
+                }else if(!samecontacts[1].phoneNumbers.isNotEmpty() && samecontacts[0].phoneNumbers.isNotEmpty()){
                     it.phoneNumbers = samecontacts[0].phoneNumbers
                 }
                 //if either contact has a name
