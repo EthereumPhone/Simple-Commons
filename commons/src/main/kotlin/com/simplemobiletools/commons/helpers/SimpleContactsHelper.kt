@@ -49,6 +49,12 @@ class SimpleContactsHelper(val context: Context) {
                 }else if(samecontacts[1].name == "" && samecontacts[0].name != ""){
                     it.name = samecontacts[0].name
                 }
+
+                if(samecontacts[0].phoneNumbers == [] && samecontacts[1].phoneNumbers != []){
+                    it.phoneNumbers = samecontacts[1].phoneNumbers
+                }else if(samecontacts[1].phoneNumbers == "" && samecontacts[0].phoneNumbers != ""){
+                    it.phoneNumbers = samecontacts[0].phoneNumbers
+                }
                 //if either contact has a name
                 /*
 
