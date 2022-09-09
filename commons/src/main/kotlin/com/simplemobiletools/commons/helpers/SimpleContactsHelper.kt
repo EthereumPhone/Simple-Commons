@@ -46,7 +46,7 @@ class SimpleContactsHelper(val context: Context) {
                 
 
                 //if either contact has a name
-                if(samecontacts[0].name == "" && samecontacts[1].name != ""){
+                /*if(samecontacts[0].name == "" && samecontacts[1].name != ""){
                     it.name = samecontacts[1].name //initialize that name into the contact
                 }else if(samecontacts[1].name == "" && samecontacts[0].name != ""){
                     it.name = samecontacts[0].name
@@ -64,8 +64,8 @@ class SimpleContactsHelper(val context: Context) {
                     it.phoneNumbers = samecontacts[1].phoneNumbers
                 }else if(samecontacts[1].phoneNumbers == "" && samecontacts[0].phoneNumbers != ""){
                     it.phoneNumbers = samecontacts[0].phoneNumbers
-                }
-            }/* */
+                }*/
+            } 
             allContacts = kotlin.collections.ArrayList<SimpleContact>(allContacts.distinctBy { it.rawId })
 
             allContacts.forEach {
