@@ -44,13 +44,13 @@ class SimpleContactsHelper(val context: Context) {
                 var tmp = it.rawId // gets rawid of element
                 val samecontacts = allContacts.filter { it.rawId == tmp } // all contacts with the same rawid
                 
-
-                //if either contact has a name
-                /*if(samecontacts[0].name == "" && samecontacts[1].name != ""){
+                if(samecontacts[0].name == "" && samecontacts[1].name != ""){
                     it.name = samecontacts[1].name //initialize that name into the contact
                 }else if(samecontacts[1].name == "" && samecontacts[0].name != ""){
                     it.name = samecontacts[0].name
                 }
+                //if either contact has a name
+                /*
 
                 //same with photoUri
                 if(samecontacts[0].photoUri == "" && samecontacts[1].photoUri != ""){
